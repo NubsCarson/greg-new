@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import OurCrew from './pages/OurCrew';
@@ -12,7 +11,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navigation />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />

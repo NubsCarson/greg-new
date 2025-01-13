@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const fadeIn = keyframes`
   from {
@@ -33,11 +34,17 @@ const Logo = styled.img`
   max-width: 300px;
   margin: 0 auto;
   display: block;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  border-radius: 15px;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
 
   &:hover {
     transform: scale(1.02);
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+    background: rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -45,8 +52,9 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: center;
   gap: 2rem;
-  padding: 1.5rem;
-  margin-top: 1rem;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 800px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   backdrop-filter: blur(5px);
@@ -210,16 +218,14 @@ const Certifications = styled.div`
 function Home() {
   return (
     <HomeContainer>
-      <Hero>
-        <Logo src="/images/Logo.png" alt="Affordable Drywall Logo" />
-        <Navigation>
-          <a href="#home">Home</a>
-          <a href="#services">Our Services</a>
-          <a href="#team">Our Team</a>
-          <a href="#gallery">Gallery</a>
-          <a href="#contact">Contact</a>
-        </Navigation>
-      </Hero>
+      <Logo src="/images/Logo.png" alt="Affordable Drywall Logo" />
+      <Navigation>
+        <Link to="/">Home</Link>
+        <Link to="/services">Our Services</Link>
+        <Link to="/our-crew">Our Crew</Link>
+        <Link to="/our-work">Gallery</Link>
+        <Link to="/contact">Contact</Link>
+      </Navigation>
 
       <MainContent>
         <CompanyInfo>
