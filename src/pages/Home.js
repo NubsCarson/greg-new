@@ -211,7 +211,7 @@ const Certifications = styled.div`
 function Home() {
   return (
     <HomeContainer>
-      <Logo src="/images/Logo.png" alt="Affordable Drywall Logo" />
+      <Logo src={process.env.PUBLIC_URL + "/images/Logo.png"} alt="Affordable Drywall Logo" />
       <Navigation>
         <Link to="/">Home</Link>
         <Link to="/services">Our Services</Link>
@@ -234,7 +234,7 @@ function Home() {
       </MainContent>
 
       <AboutSection>
-        <WorkImage src="/images/IMG_0436.jpg" alt="Drywall Work Example" />
+        <WorkImage src={process.env.PUBLIC_URL + "/images/IMG_0436.jpg"} alt="Drywall Work Example" />
         <AboutContent>
           <h2>Affordable Drywall: Building Relationships with Quality Work</h2>
           <p>
@@ -263,7 +263,7 @@ function Home() {
           </div>
         </AboutContent>
         <Certifications>
-          <img src="/images/Home-Advisor-Logo-300x232.jpg" alt="Home Advisor Certification" />
+          <img src={process.env.PUBLIC_URL + "/images/Home-Advisor-Logo-300x232.jpg"} alt="Home Advisor Certification" />
         </Certifications>
       </AboutSection>
     </HomeContainer>

@@ -198,35 +198,35 @@ function OurWork() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const workImages = [
-    { 
-      src: '/images/work/IMG_7965.jpg', 
-      alt: 'Metal Framing Construction - Before',
-      type: 'Before'
+    {
+      src: process.env.PUBLIC_URL + "/images/work/IMG_7965.jpg",
+      alt: "Metal Framing Construction - Before",
+      type: "Before"
     },
-    { 
-      src: '/images/work/IMG_0436.jpg', 
-      alt: 'Garage Completion - After',
-      type: 'After'
+    {
+      src: process.env.PUBLIC_URL + "/images/work/IMG_0436.jpg",
+      alt: "Garage Completion - After",
+      type: "After"
     },
-    { 
-      src: '/images/work/image00000028129.jpg', 
-      alt: 'Ceiling Damage - Before',
-      type: 'Before'
+    {
+      src: process.env.PUBLIC_URL + "/images/work/image00000028129.jpg",
+      alt: "Ceiling Damage - Before",
+      type: "Before"
     },
-    { 
-      src: '/images/work/image00000028229.jpg', 
-      alt: 'Ceiling Repair - After',
-      type: 'After'
+    {
+      src: process.env.PUBLIC_URL + "/images/work/image00000028229.jpg",
+      alt: "Repaired Ceiling - After",
+      type: "After"
     },
-    { 
-      src: '/images/work/IMG_8198.jpg', 
-      alt: 'Construction Area - Before',
-      type: 'Before'
+    {
+      src: process.env.PUBLIC_URL + "/images/work/IMG_8198.jpg",
+      alt: "Construction Area - Before",
+      type: "Before"
     },
-    { 
-      src: '/images/work/View_recent_photos.jpg', 
-      alt: 'Recent Work Photos - After',
-      type: 'After'
+    {
+      src: process.env.PUBLIC_URL + "/images/work/View_recent_photos.jpg",
+      alt: "Recent Work Photos - After",
+      type: "After"
     }
   ];
 
