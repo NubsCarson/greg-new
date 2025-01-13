@@ -199,32 +199,32 @@ function OurWork() {
 
   const workImages = [
     {
-      src: process.env.PUBLIC_URL + "/images/work/IMG_7965.jpg",
+      src: "images/work/IMG_7965.jpg",
       alt: "Metal Framing Construction - Before",
       type: "Before"
     },
     {
-      src: process.env.PUBLIC_URL + "/images/work/IMG_0436.jpg",
+      src: "images/work/IMG_0436.jpg",
       alt: "Garage Completion - After",
       type: "After"
     },
     {
-      src: process.env.PUBLIC_URL + "/images/work/image00000028129.jpg",
+      src: "images/work/image00000028129.jpg",
       alt: "Ceiling Damage - Before",
       type: "Before"
     },
     {
-      src: process.env.PUBLIC_URL + "/images/work/image00000028229.jpg",
+      src: "images/work/image00000028229.jpg",
       alt: "Repaired Ceiling - After",
       type: "After"
     },
     {
-      src: process.env.PUBLIC_URL + "/images/work/IMG_8198.jpg",
+      src: "images/work/IMG_8198.jpg",
       alt: "Construction Area - Before",
       type: "Before"
     },
     {
-      src: process.env.PUBLIC_URL + "/images/work/View_recent_photos.jpg",
+      src: "images/work/View_recent_photos.jpg",
       alt: "Recent Work Photos - After",
       type: "After"
     }
@@ -232,7 +232,7 @@ function OurWork() {
 
   return (
     <WorkContainer>
-      <Logo src={process.env.PUBLIC_URL + "/images/Logo.png"} alt="Affordable Drywall Logo" />
+      <Logo src="images/Logo.png" alt="Affordable Drywall Logo" />
       <Navigation>
         <Link to="/">Home</Link>
         <Link to="/services">Our Services</Link>
