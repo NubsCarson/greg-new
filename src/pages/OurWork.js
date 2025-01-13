@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
   from {
@@ -333,6 +334,7 @@ function OurWork() {
           <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
         </Modal>
       )}
+      <Footer />
     </WorkContainer>
   );
 }

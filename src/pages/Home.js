@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
   from {
@@ -266,6 +267,7 @@ function Home() {
           <img src="images/Home-Advisor-Logo-300x232.jpg" alt="Home Advisor Certification" />
         </Certifications>
       </AboutSection>
+      <Footer />
     </HomeContainer>
   );
 }

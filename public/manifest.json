@@ -3,9 +3,9 @@
   "name": "Affordable Drywall - Henderson & Las Vegas Drywall Experts",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "images/Logo.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
       "src": "images/Logo.png",
