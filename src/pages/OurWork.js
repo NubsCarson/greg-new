@@ -28,6 +28,10 @@ const Header = styled.header`
   text-align: center;
   padding: 3rem 2rem;
   background: rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const Title = styled.h1`
@@ -37,6 +41,11 @@ const Title = styled.h1`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const Subtitle = styled.p`
@@ -45,6 +54,11 @@ const Subtitle = styled.p`
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
 `;
 
 const GalleryGrid = styled.div`
@@ -57,6 +71,8 @@ const GalleryGrid = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
   }
 `;
 
@@ -72,6 +88,10 @@ const ImageCard = styled.div`
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    aspect-ratio: 3/2;
   }
 `;
 
@@ -90,18 +110,41 @@ const Overlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
   opacity: 0;
   transition: opacity 0.3s ease;
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  padding: 1rem;
+  text-align: center;
+
+  .type {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .expand {
+    font-size: 1rem;
+    color: #4db8ff;
+    text-transform: none;
+    letter-spacing: normal;
+  }
 
   ${ImageCard}:hover & {
     opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .type {
+      font-size: 1.5rem;
+    }
+    .expand {
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -161,6 +204,14 @@ const Navigation = styled.nav`
   border-radius: 50px;
   backdrop-filter: blur(5px);
   
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-radius: 25px;
+  }
+  
   a {
     color: white;
     text-decoration: none;
@@ -172,6 +223,11 @@ const Navigation = styled.nav`
     &:hover {
       background: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
     }
   }
 `;
@@ -186,6 +242,11 @@ const Logo = styled.img`
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(5px);
+
+  @media (max-width: 768px) {
+    max-width: 200px;
+    padding: 0.3rem;
+  }
 
   &:hover {
     transform: scale(1.02);
@@ -254,7 +315,10 @@ function OurWork() {
         {workImages.map((image, index) => (
           <ImageCard key={index} onClick={() => setSelectedImage(image)}>
             <Image src={image.src} alt={image.alt} loading="lazy" />
-            <Overlay>{image.type}</Overlay>
+            <Overlay>
+              <div className="type">{image.type}</div>
+              <div className="expand">Click to expand image</div>
+            </Overlay>
           </ImageCard>
         ))}
       </GalleryGrid>
