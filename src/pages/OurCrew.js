@@ -167,6 +167,7 @@ const PhotoCard = styled.div`
     transition: transform 0.3s ease;
     background: rgba(0, 0, 0, 0.1);
     padding: 1rem;
+    border-radius: 20px;
   }
 
   &:hover img {
@@ -176,6 +177,7 @@ const PhotoCard = styled.div`
   @media (max-width: 768px) {
     img {
       height: 450px;
+      border-radius: 15px;
     }
   }
 `;
