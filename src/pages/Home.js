@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
@@ -19,9 +19,23 @@ const HomeContainer = styled.div`
   max-width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #005580;
+  background: linear-gradient(135deg, #005580 0%, #003854 100%);
   color: white;
   animation: ${fadeIn} 1s ease-out;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/texture.png') repeat;
+    opacity: 0.05;
+    pointer-events: none;
+  }
 `;
 
 const Logo = styled.img`
@@ -53,6 +67,14 @@ const Navigation = styled.nav`
   border-radius: 50px;
   backdrop-filter: blur(5px);
   
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 25px;
+    margin: 0.5rem;
+  }
+  
   a {
     color: white;
     text-decoration: none;
@@ -60,6 +82,14 @@ const Navigation = styled.nav`
     padding: 0.5rem 1rem;
     transition: all 0.3s ease;
     border-radius: 25px;
+    
+    @media (max-width: 768px) {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+      flex: 1;
+      text-align: center;
+      min-width: 80px;
+    }
     
     &:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -77,48 +107,107 @@ const MainContent = styled.div`
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   animation: ${fadeIn} 1s ease-out 0.3s backwards;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    opacity: 0.5;
+    animation: rotate 20s linear infinite;
+  }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    padding: 2rem 1rem;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
 const CompanyInfo = styled.div`
+  position: relative;
+  z-index: 1;
+
   h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 1rem;
     background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: -1px;
+    font-weight: 700;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+    }
   }
 
   .services {
     font-size: 1.8rem;
-    margin-bottom: 1rem;
-    text-decoration: none;
+    margin-bottom: 1.5rem;
     color: #4db8ff;
-    transition: color 0.3s ease;
-    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
+    position: relative;
+    display: inline-block;
 
-    &:hover {
-      color: #80ccff;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #4db8ff 0%, transparent 100%);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
     }
   }
 
   .phone {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    text-decoration: none;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
     color: #4db8ff;
-    transition: color 0.3s ease;
-    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background: rgba(77, 184, 255, 0.1);
 
     &:hover {
       color: #80ccff;
+      background: rgba(77, 184, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(77, 184, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1.8rem;
     }
   }
 
@@ -126,18 +215,46 @@ const CompanyInfo = styled.div`
     font-size: 1.3rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: '📍';
+      font-size: 1.2em;
+    }
   }
 `;
 
 const LicenseInfo = styled.div`
   text-align: right;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
 
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    &::before {
+      transform: translateX(100%);
+    }
   }
 
   @media (max-width: 768px) {
@@ -148,6 +265,13 @@ const LicenseInfo = styled.div`
     margin-bottom: 1rem;
     font-size: 1.2rem;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+
+    &:last-child {
+      margin-bottom: 0;
+      color: #4db8ff;
+    }
   }
 `;
 
@@ -196,10 +320,16 @@ const WorkImage = styled.img`
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.02);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    margin: 1rem auto;
+    border-radius: 15px;
   }
 `;
 
@@ -222,7 +352,155 @@ const Certifications = styled.div`
   }
 `;
 
+const ServicesSection = styled.div`
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: ${fadeIn} 1s ease-out;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const ServicesList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+`;
+
+const ServiceItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+    gap: 0.8rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .icon {
+    font-size: 1.5rem;
+    color: #4db8ff;
+    min-width: 2rem;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+      min-width: 1.5rem;
+    }
+  }
+
+  .text {
+    font-size: 1.1rem;
+    color: white;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+`;
+
+const FreeEstimate = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #4db8ff;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
+  animation: pulse 2s infinite;
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+`;
+
+const Modal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  cursor: pointer;
+`;
+
+const ModalImage = styled.img`
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+`;
+
+const CloseButton = styled.button`
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
 function Home() {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <HomeContainer>
       <Logo src="images/Logo.png" alt="Affordable Drywall Logo" />
@@ -238,7 +516,7 @@ function Home() {
         <CompanyInfo>
           <h1>Affordable Drywall LLC.</h1>
           <div className="services">Full Service Drywall & Paint Company</div>
-          <div className="phone">702-497-0477</div>
+          <a href="tel:702-497-0477" className="phone">702-497-0477</a>
           <div className="location">Vegas, Henderson, and surrounding areas.</div>
         </CompanyInfo>
         <LicenseInfo>
@@ -248,8 +526,59 @@ function Home() {
         </LicenseInfo>
       </MainContent>
 
+      <ServicesSection>
+        <h2>Our Services</h2>
+        <ServicesList>
+          <ServiceItem>
+            <span className="icon">🏗️</span>
+            <span className="text">New Construction</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🔨</span>
+            <span className="text">Drywall Installation and Finishing</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🔧</span>
+            <span className="text">Repairs</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">💧</span>
+            <span className="text">Water Damage</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🔄</span>
+            <span className="text">Popcorn Ceiling Removal</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🎨</span>
+            <span className="text">Texture Matching</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🛠️</span>
+            <span className="text">Stress Cracks & Corner Dents</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🔊</span>
+            <span className="text">Soundproofing</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">🎯</span>
+            <span className="text">Professional Painting</span>
+          </ServiceItem>
+          <ServiceItem>
+            <span className="icon">✨</span>
+            <span className="text">And More...</span>
+          </ServiceItem>
+        </ServicesList>
+        <FreeEstimate>FREE ESTIMATES</FreeEstimate>
+      </ServicesSection>
+
       <AboutSection>
-        <WorkImage src="images/IMG_0436.jpg" alt="Drywall Work Example" />
+        <WorkImage 
+          src="images/IMG_0436.jpg" 
+          alt="Drywall Work Example" 
+          onClick={() => setSelectedImage("images/IMG_0436.jpg")}
+        />
         <AboutContent>
           <h2>Affordable Drywall: Building Relationships with Quality Work</h2>
           <p>
@@ -281,6 +610,18 @@ function Home() {
           <img src="images/Home-Advisor-Logo-300x232.jpg" alt="Home Advisor Certification" />
         </Certifications>
       </AboutSection>
+
+      {selectedImage && (
+        <Modal onClick={() => setSelectedImage(null)}>
+          <ModalImage 
+            src={selectedImage} 
+            alt="Expanded view" 
+            onClick={e => e.stopPropagation()} 
+          />
+          <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
+        </Modal>
+      )}
+      
       <Footer />
     </HomeContainer>
   );
