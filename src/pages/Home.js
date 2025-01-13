@@ -96,6 +96,19 @@ const CompanyInfo = styled.div`
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
 
+  .services {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #4db8ff;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: #80ccff;
+    }
+  }
+
   .phone {
     font-size: 1.8rem;
     margin-bottom: 1rem;
@@ -224,6 +237,7 @@ function Home() {
       <MainContent>
         <CompanyInfo>
           <h1>Affordable Drywall LLC.</h1>
+          <div className="services">Full Service Drywall & Paint Company</div>
           <div className="phone">702-497-0477</div>
           <div className="location">Vegas, Henderson, and surrounding areas.</div>
         </CompanyInfo>
