@@ -11,37 +11,26 @@ const fadeIn = keyframes`
 const CrewContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(135deg, #005580 0%, #003366 100%);
-  animation: ${fadeIn} 1s ease-in;
-  padding: 2rem;
+  animation: ${fadeIn} 0.5s ease-in;
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-    z-index: 0;
-  }
+  overflow: hidden;
 `;
 
 const Logo = styled.img`
-  width: 150px;
+  width: 200px;
   height: auto;
-  margin: 1rem;
-  cursor: pointer;
+  margin: 1rem auto;
+  display: block;
   transition: all 0.3s ease;
   border-radius: 15px;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  padding: 0.5rem;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -49,13 +38,12 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin: 1rem 0;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 85, 128, 0.3);
   backdrop-filter: blur(10px);
-  border-radius: 15px;
+  margin: 0 auto;
   max-width: 800px;
-  margin: 1rem auto;
+  border-radius: 50px;
 
   a {
     color: white;
@@ -64,40 +52,70 @@ const Navigation = styled.nav`
     transition: all 0.3s ease;
     padding: 0.5rem 1rem;
     border-radius: 8px;
+    font-family: 'itc-avant-garde-gothic-pro', sans-serif;
 
     &:hover {
       background: rgba(255, 255, 255, 0.1);
       transform: translateY(-2px);
     }
   }
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 1rem;
+    border-radius: 25px;
+
+    a {
+      font-size: 1rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin: 2rem 0;
+  padding: 3rem 1rem;
   position: relative;
   z-index: 1;
+  background: rgba(0, 85, 128, 0.3);
+  margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin: 0;
   background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'itc-avant-garde-gothic-pro', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const TeamSection = styled.div`
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0 auto 2rem;
   padding: 2rem;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    margin: 0 1rem 2rem;
+    padding: 1.5rem;
+  }
 `;
 
 const TeamDescription = styled.p`
@@ -106,35 +124,59 @@ const TeamDescription = styled.p`
   line-height: 1.8;
   text-align: center;
   margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
 `;
 
 const TeamPhotos = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 `;
 
 const PhotoCard = styled.div`
   position: relative;
   overflow: hidden;
-  border-radius: 40px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  background: rgba(0, 85, 128, 0.1);
 
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
 
   img {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+    height: 600px;
+    object-fit: contain;
     transition: transform 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 1rem;
   }
 
   &:hover img {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    img {
+      height: 450px;
+    }
   }
 `;
 
@@ -144,12 +186,12 @@ const OurCrew = () => {
       <Link to="/">
         <Logo src="images/Logo.png" alt="Affordable Drywall Logo" />
       </Link>
-      
       <Navigation>
         <Link to="/">Home</Link>
         <Link to="/services">Our Services</Link>
         <Link to="/our-crew">Our Crew</Link>
         <Link to="/our-work">Gallery</Link>
+        <Link to="/contact">Contact</Link>
       </Navigation>
 
       <Header>
