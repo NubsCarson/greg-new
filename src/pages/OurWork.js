@@ -232,7 +232,7 @@ function OurWork() {
 
   return (
     <WorkContainer>
-      <Logo src="/images/Logo.png" alt="Affordable Drywall Logo" />
+      <Logo src={process.env.PUBLIC_URL + "/images/Logo.png"} alt="Affordable Drywall Logo" />
       <Navigation>
         <Link to="/">Home</Link>
         <Link to="/services">Our Services</Link>
