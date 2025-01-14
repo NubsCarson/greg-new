@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import homeAdvisorIcon from '../../public/images/Icon1.png';
 
 const FooterContainer = styled.footer`
   background: rgba(0, 0, 0, 0.2);
@@ -52,7 +53,7 @@ function Footer() {
     <FooterContainer>
       <Certification>
         <a href="https://www.homeadvisor.com" target="_blank" rel="noopener noreferrer">
-          <img src="/images/icon1.png" alt="Home Advisor Certified" />
+          <img src={homeAdvisorIcon} alt="Home Advisor Certified" />
         </a>
       </Certification>
       <Copyright>
