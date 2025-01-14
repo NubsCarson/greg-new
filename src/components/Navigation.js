@@ -1,116 +1,108 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
 
-const NavContainer = styled.div`
-  background: #004165;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const LogoContainer = styled.div`
-  padding: 1rem;
-  text-align: center;
-  img {
-    max-width: 250px;
-    height: auto;
-    border-radius: 15px;
-    background: white;
-    padding: 12px;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.02);
-    }
+const pulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(77, 184, 255, 0.4);
   }
-
-  @media (max-width: 768px) {
-    img {
-      max-width: 200px;
-      padding: 10px;
-    }
+  70% {
+    box-shadow: 0 0 0 10px rgba(77, 184, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(77, 184, 255, 0);
   }
 `;
 
 const Nav = styled.nav`
-  width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1rem;
+  background: linear-gradient(135deg, #005580 0%, #003854 100%);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
-const NavList = styled.ul`
+const NavContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 3rem;
-  max-width: 800px;
-  margin: 0 auto;
+  align-items: center;
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 
   @media (max-width: 768px) {
     gap: 1rem;
-    flex-wrap: wrap;
   }
 `;
 
-const NavItem = styled.li`
-  a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s ease;
-    position: relative;
+const NavLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
 
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: ${props => props.isActive ? 'white' : 'transparent'};
-      transition: all 0.3s ease;
-    }
+  &:hover {
+    color: #4db8ff;
+  }
 
-    &:hover:after {
-      background: white;
-    }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+`;
+
+const HiringButton = styled(Link)`
+  background: linear-gradient(135deg, #4db8ff 0%, #0077cc 100%);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  animation: ${pulse} 2s infinite;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #66c2ff 0%, #0088ee 100%);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
   }
 `;
 
 function Navigation() {
-  const location = useLocation();
+  const scrollToHiring = () => {
+    const hiringSection = document.getElementById('hiring-section');
+    if (hiringSection) {
+      hiringSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <NavContainer>
-      <LogoContainer>
-        <img src="/images/Logo.png" alt="Affordable Drywall" />
-      </LogoContainer>
-      <Nav>
-        <NavList>
-          <NavItem isActive={location.pathname === '/'}>
-            <Link to="/">Home</Link>
-          </NavItem>
-          <NavItem isActive={location.pathname === '/services'}>
-            <Link to="/services">Our Services</Link>
-          </NavItem>
-          <NavItem isActive={location.pathname === '/our-crew'}>
-            <Link to="/our-crew">Our Crew</Link>
-          </NavItem>
-          <NavItem isActive={location.pathname.includes('/our-work')}>
-            <Link to="/our-work">Gallery</Link>
-          </NavItem>
-          <NavItem isActive={location.pathname === '/contact'}>
-            <Link to="/contact">Contact</Link>
-          </NavItem>
-        </NavList>
-      </Nav>
-    </NavContainer>
+    <Nav>
+      <NavContainer>
+        <NavLinks>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/services">Services</NavLink>
+          <NavLink to="/our-work">Our Work</NavLink>
+          <NavLink to="/our-crew">Our Crew</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+          <HiringButton to="/#hiring-section" onClick={scrollToHiring}>
+            🔨 We're Hiring!
+          </HiringButton>
+        </NavLinks>
+      </NavContainer>
+    </Nav>
   );
 }
 

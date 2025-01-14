@@ -55,6 +55,18 @@ const scaleIn = keyframes`
   }
 `;
 
+const pulse = keyframes`
+  0% {
+    box-shadow: 0 0 0 0 rgba(77, 184, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(77, 184, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(77, 184, 255, 0);
+  }
+`;
+
 const HomeContainer = styled.div`
   width: 100%;
   max-width: 100%;
@@ -398,7 +410,7 @@ const EstimateTitle = styled.h2`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  animation: pulse 2s infinite;
+  animation: ${pulse} 2s infinite;
 
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -574,6 +586,129 @@ const ReviewButton = styled.a`
   }
 `;
 
+const HiringSection = styled.section`
+  text-align: center;
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  background: linear-gradient(135deg, rgba(77, 184, 255, 0.15) 0%, rgba(0, 119, 204, 0.15) 100%);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(77, 184, 255, 0.3);
+  animation: ${fadeIn} 1s ease-out;
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(77, 184, 255, 0.1) 0%, transparent 60%);
+    opacity: 0.5;
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+  }
+`;
+
+const HiringTitle = styled.h2`
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 10px rgba(77, 184, 255, 0.5);
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '🔨';
+    position: absolute;
+    top: -15px;
+    right: -40px;
+    font-size: 2rem;
+    animation: ${pulse} 2s infinite;
+  }
+`;
+
+const HiringText = styled.p`
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 1.5rem auto;
+  max-width: 800px;
+  line-height: 1.6;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+`;
+
+const PositionsList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 2rem 0;
+`;
+
+const PositionCard = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(77, 184, 255, 0.4);
+  }
+
+  h3 {
+    color: #4db8ff;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #fff;
+    opacity: 0.9;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+`;
+
+const ApplyButton = styled.a`
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  font-size: 1.4rem;
+  color: white;
+  background: linear-gradient(135deg, #4db8ff 0%, #0077cc 100%);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  margin-top: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  animation: ${pulse} 2s infinite;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(77, 184, 255, 0.4);
+    background: linear-gradient(135deg, #66c2ff 0%, #0088ee 100%);
+  }
+`;
+
 function Home() {
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -686,6 +821,31 @@ function Home() {
           <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
         </Modal>
       )}
+
+      <HiringSection id="hiring-section">
+        <HiringTitle>We're Hiring!</HiringTitle>
+        <HiringText>
+          Join our growing team of skilled professionals! We're looking for talented individuals 
+          who are passionate about quality workmanship and customer satisfaction.
+        </HiringText>
+        <PositionsList>
+          <PositionCard>
+            <h3>Drywall Installers</h3>
+            <p>Experienced installers needed for residential and commercial projects. Competitive pay and benefits.</p>
+          </PositionCard>
+          <PositionCard>
+            <h3>Drywall Finishers</h3>
+            <p>Skilled finishers with attention to detail. Experience with various finishing techniques required.</p>
+          </PositionCard>
+          <PositionCard>
+            <h3>Painters</h3>
+            <p>Professional painters with experience in both interior and exterior painting. Full-time positions available.</p>
+          </PositionCard>
+        </PositionsList>
+        <ApplyButton href="tel:702-497-0477">
+          Apply Now 📞
+        </ApplyButton>
+      </HiringSection>
       
       <Footer />
     </HomeContainer>
