@@ -13,6 +13,48 @@ const fadeIn = keyframes`
   }
 `;
 
+const shimmer = keyframes`
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+`;
+
+const slideInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const slideInRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const scaleIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
 const HomeContainer = styled.div`
   width: 100%;
   max-width: 100%;
@@ -55,15 +97,22 @@ const MainContent = styled.div`
   gap: 2rem;
   padding: 3rem 2rem;
   max-width: 1200px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.05);
+  margin: 4rem auto;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  animation: ${fadeIn} 1s ease-out 0.3s backwards;
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+
+  > *:first-child {
+    animation: ${slideInLeft} 0.8s ease-out forwards;
+  }
+
+  > *:last-child {
+    animation: ${slideInRight} 0.8s ease-out forwards;
+  }
 
   &::before {
     content: '';
@@ -92,100 +141,25 @@ const MainContent = styled.div`
   }
 `;
 
-const CompanyInfo = styled.div`
-  position: relative;
-  z-index: 1;
-
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    letter-spacing: -1px;
-    font-weight: 700;
-
-    @media (max-width: 768px) {
-      font-size: 2.5rem;
-    }
-  }
-
-  .services {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: #4db8ff;
-    transition: all 0.3s ease;
-    text-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
-    position: relative;
-    display: inline-block;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #4db8ff 0%, transparent 100%);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-
-    &:hover::after {
-      transform: scaleX(1);
-    }
-  }
-
-  .phone {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #4db8ff;
-    transition: all 0.3s ease;
-    display: inline-block;
-    text-decoration: none;
-    position: relative;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    background: rgba(77, 184, 255, 0.1);
-
-    &:hover {
-      color: #80ccff;
-      background: rgba(77, 184, 255, 0.2);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(77, 184, 255, 0.2);
-    }
-
-    @media (max-width: 768px) {
-      font-size: 1.8rem;
-    }
-  }
-
-  .location {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    &::before {
-      content: '📍';
-      font-size: 1.2em;
-    }
-  }
-`;
-
-const LicenseInfo = styled.div`
-  text-align: right;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.2);
+const sharedCardStyles = `
+  text-align: center;
+  padding: 2.5rem;
   border-radius: 15px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
+  z-index: 2;
+  transition: all 0.4s ease;
   overflow: hidden;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+  }
 
   &::before {
     content: '';
@@ -193,36 +167,142 @@ const LicenseInfo = styled.div`
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
-    transform: translateX(-100%);
+    height: 4px;
+    background: linear-gradient(90deg, #4db8ff, #0056b3);
+    transform: scaleX(0);
     transition: transform 0.6s ease;
+    transform-origin: left;
   }
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  &:hover::before {
+    transform: scaleX(1);
+  }
+`;
 
-    &::before {
-      transform: translateX(100%);
+const CompanyInfo = styled.div`
+  ${sharedCardStyles}
+
+  h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: ${scaleIn} 0.8s ease-out forwards;
+  }
+
+  .services {
+    color: #4db8ff;
+    margin: 1.2rem 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: ${slideInLeft} 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  .phone {
+    display: inline-block;
+    color: #fff;
+    font-size: 2rem;
+    text-decoration: none;
+    margin: 1.2rem 0;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: ${scaleIn} 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+
+    &:hover {
+      color: #4db8ff;
+      transform: scale(1.05);
     }
   }
 
-  @media (max-width: 768px) {
+  .location {
+    color: #e6e6e6;
+    font-size: 1.2rem;
+    margin: 1.2rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    animation: ${slideInLeft} 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+`;
+
+const LicenseInfo = styled.div`
+  ${sharedCardStyles}
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 3rem;
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 1000px 100%;
+    animation: ${shimmer} 8s linear infinite;
+    pointer-events: none;
+  }
+`;
+
+const LicenseItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateX(30px);
+  animation: ${slideInRight} 0.6s ease-out forwards;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:nth-child(1) { animation-delay: 0.2s; }
+  &:nth-child(2) { animation-delay: 0.4s; }
+  &:nth-child(3) { animation-delay: 0.6s; }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(10px);
+  }
+
+  .icon {
+    font-size: 1.8rem;
+    color: #4db8ff;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
     text-align: left;
   }
 
-  p {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 1;
+  .label {
+    font-size: 0.9rem;
+    color: #4db8ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.2rem;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-      color: #4db8ff;
-    }
+  .value {
+    font-size: 1.3rem;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -349,6 +429,9 @@ const EstimatePhone = styled.a`
   border: 2px solid rgba(77, 184, 255, 0.3);
   margin-top: 1rem;
   font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
 
   &:hover {
     background: rgba(77, 184, 255, 0.3);
@@ -419,6 +502,78 @@ const CloseButton = styled.button`
   }
 `;
 
+const ReviewsSection = styled.section`
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+    
+    span {
+      color: #ffd700;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+    
+    h2 {
+      font-size: 2rem;
+    }
+  }
+`;
+
+const ReviewStats = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .stars {
+    color: #ffd700;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    font-size: 1.2rem;
+  }
+`;
+
+const ReviewButton = styled.a`
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: #ffd700;
+  color: #004165;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    background: #ffe44d;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.8rem 1.6rem;
+  }
+`;
+
 function Home() {
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -432,11 +587,48 @@ function Home() {
           <div className="location">Vegas, Henderson, and surrounding areas.</div>
         </CompanyInfo>
         <LicenseInfo>
-          <p>NSCB License # 0090041</p>
-          <p>Bid Limit $100,000</p>
-          <p>Licensed Bonded and Insured.</p>
+          <LicenseItem>
+            <div className="icon">📋</div>
+            <div className="content">
+              <span className="label">NSCB License</span>
+              <span className="value"># 0090041</span>
+            </div>
+          </LicenseItem>
+          <LicenseItem>
+            <div className="icon">💰</div>
+            <div className="content">
+              <span className="label">Bid Limit</span>
+              <span className="value">$100,000</span>
+            </div>
+          </LicenseItem>
+          <LicenseItem>
+            <div className="icon">🛡️</div>
+            <div className="content">
+              <span className="label">Status</span>
+              <span className="value">Licensed, Bonded & Insured</span>
+            </div>
+          </LicenseItem>
         </LicenseInfo>
       </MainContent>
+
+      <ReviewsSection>
+        <h2>Our Customers <span>Love</span> Our Work</h2>
+        <ReviewStats>
+          <div className="rating">
+            <span className="stars">★★★★★</span>
+            <span>5.0 Rating</span>
+          </div>
+          <div>|</div>
+          <div>17 Google Reviews</div>
+        </ReviewStats>
+        <ReviewButton 
+          href="https://g.co/kgs/6ab7ucE"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Read Our Reviews on Google
+        </ReviewButton>
+      </ReviewsSection>
 
       <EstimateSection>
         <EstimateTitle>FREE ESTIMATES</EstimateTitle>
@@ -451,9 +643,9 @@ function Home() {
 
       <AboutSection>
         <WorkImage 
-          src="images/IMG_0436.jpg" 
+          src="/images/IMG_0436.jpg" 
           alt="Drywall Work Example" 
-          onClick={() => setSelectedImage("images/IMG_0436.jpg")}
+          onClick={() => setSelectedImage("/images/IMG_0436.jpg")}
         />
         <AboutContent>
           <h2>Affordable Drywall: Building Relationships with Quality Work</h2>
