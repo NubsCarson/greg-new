@@ -15,64 +15,6 @@ const CrewContainer = styled.div`
   overflow: hidden;
 `;
 
-const Logo = styled.img`
-  width: 200px;
-  height: auto;
-  margin: 1rem auto;
-  display: block;
-  transition: all 0.3s ease;
-  border-radius: 15px;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-
-  &:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-`;
-
-const Navigation = styled.nav`
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 1rem;
-  background: rgba(0, 85, 128, 0.3);
-  backdrop-filter: blur(10px);
-  margin: 0 auto;
-  max-width: 800px;
-  border-radius: 50px;
-
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-family: 'itc-avant-garde-gothic-pro', sans-serif;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateY(-2px);
-    }
-  }
-
-  @media (max-width: 768px) {
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0 1rem;
-    border-radius: 25px;
-
-    a {
-      font-size: 1rem;
-      padding: 0.4rem 0.8rem;
-    }
-  }
-`;
-
 const Header = styled.div`
   text-align: center;
   padding: 3rem 1rem;

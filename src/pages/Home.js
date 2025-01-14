@@ -37,23 +37,17 @@ const HomeContainer = styled.div`
   }
 `;
 
-const Logo = styled.img`
-  max-width: 300px;
-  margin: 0 auto;
-  display: block;
-  transition: all 0.3s ease;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
-  border-radius: 15px;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(5px);
-
-  &:hover {
-    transform: scale(1.02);
-    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
-    background: rgba(255, 255, 255, 0.1);
-  }
-`;
+// const Logo = styled.img`
+//   max-width: 200px;
+//   height: auto;
+//   margin: 20px auto;
+//   display: block;
+//   border-radius: 50%;
+//   transition: transform 0.3s ease;
+//   &:hover {
+//     transform: scale(1.05);
+//   }
+// `;
 
 const MainContent = styled.div`
   display: grid;
