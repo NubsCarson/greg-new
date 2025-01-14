@@ -27,8 +27,27 @@ const NavContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 1rem;
+`;
+
+const Logo = styled.img`
+  height: 120px;
+  width: auto;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    height: 90px;
+  }
 `;
 
 const NavLinks = styled.div`
@@ -91,6 +110,7 @@ function Navigation() {
   return (
     <Nav>
       <NavContainer>
+        <Logo src="/images/Logo.png" alt="Affordable Drywall LLC Logo" />
         <NavLinks>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/services">Services</NavLink>
