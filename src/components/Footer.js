@@ -52,7 +52,7 @@ function Footer() {
     <FooterContainer>
       <Certification>
         <a href="https://www.homeadvisor.com" target="_blank" rel="noopener noreferrer">
-          <img src="/images/Home-Advisor-Icon.png" alt="Home Advisor Certified" />
+          <img src="/images/icon1.png" alt="Home Advisor Certified" />
         </a>
       </Certification>
       <Copyright>
