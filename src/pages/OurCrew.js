@@ -1,149 +1,214 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 `;
 
 const CrewContainer = styled.div`
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #005580;
+  color: white;
   min-height: 100vh;
-  background: linear-gradient(135deg, #005580 0%, #003366 100%);
-  animation: ${fadeIn} 0.5s ease-in;
-  position: relative;
-  overflow: hidden;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   text-align: center;
-  padding: 3rem 1rem;
-  position: relative;
-  z-index: 1;
-  background: rgba(0, 85, 128, 0.3);
-  margin-bottom: 2rem;
+  padding: 3rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
 
   @media (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 `;
 
 const Title = styled.h1`
-  font-size: 3.5rem;
-  margin: 0;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
   background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: 'itc-avant-garde-gothic-pro', sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
-const TeamSection = styled.div`
-  max-width: 1200px;
-  margin: 0 auto 2rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  position: relative;
-  z-index: 1;
-
-  @media (max-width: 768px) {
-    margin: 0 1rem 2rem;
-    padding: 1.5rem;
-  }
-`;
-
-const TeamDescription = styled.p`
-  color: white;
+const Subtitle = styled.p`
   font-size: 1.2rem;
-  line-height: 1.8;
-  text-align: center;
-  margin-bottom: 3rem;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
 
   @media (max-width: 768px) {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 `;
 
-const TeamPhotos = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const PhotoCard = styled.div`
+const SlideshowContainer = styled.div`
+  max-width: 800px;
+  width: 90%;
+  margin: 2rem auto;
   position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  aspect-ratio: 16/9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SlideImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  animation: ${slideIn} 0.5s ease-out;
+`;
+
+const SlideButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
-  background: rgba(0, 85, 128, 0.1);
+  z-index: 2;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
   }
+`;
 
-  img {
-    width: 100%;
-    height: 600px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    background: rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    border-radius: 20px;
-  }
+const PrevButton = styled(SlideButton)`
+  left: 10px;
+`;
 
-  &:hover img {
-    transform: scale(1.05);
-  }
+const NextButton = styled(SlideButton)`
+  right: 10px;
+`;
 
-  @media (max-width: 768px) {
-    img {
-      height: 450px;
-      border-radius: 15px;
-    }
+const DotContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+`;
+
+const Dot = styled.button`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: ${props => props.active ? '#4db8ff' : 'rgba(255, 255, 255, 0.3)'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2);
   }
 `;
 
 function OurCrew() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  const images = [
+    { src: "/images/crew/crew1.jpg", alt: "Crew Member 1" },
+    { src: "/images/crew/crew2.jpg", alt: "Crew Member 2" },
+    { src: "/images/crew/crew3.jpg", alt: "Crew Member 3" },
+    { src: "/images/crew/crew4.png", alt: "Crew Member 4" }
+  ];
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlaying) {
+      interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % images.length);
+      }, 5000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, images.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+    setIsAutoPlaying(false);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+    setIsAutoPlaying(false);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+    setIsAutoPlaying(false);
+  };
+
   return (
     <CrewContainer>
       <Header>
         <Title>Our Crew</Title>
+        <Subtitle>
+          Meet the skilled professionals who make up our dedicated team. With years of experience
+          and a commitment to excellence, our crew delivers outstanding results on every project.
+        </Subtitle>
       </Header>
-      
-      <TeamSection>
-        <TeamDescription>
-          At Affordable Drywall, our team is the heartbeat of our operations. United by a shared commitment to craftsmanship and customer satisfaction, our team of seasoned drywall professionals brings a wealth of experience to every project. Each member is a skilled craftsman, meticulously trained in the latest techniques and safety protocols to ensure the highest standards of quality. From precise installations to seamless finishes, our dedicated team works tirelessly to transform your spaces with skill, precision, and an eye for detail.
-        </TeamDescription>
 
-        <TeamPhotos>
-          <PhotoCard>
-            <img src="images/crew/IMG-20240228-WA0006.jpg" alt="Affordable Drywall Team Member" />
-          </PhotoCard>
-          <PhotoCard>
-            <img src="images/crew/mifywk.jpg" alt="Affordable Drywall Team Member" />
-          </PhotoCard>
-        </TeamPhotos>
-      </TeamSection>
+      <SlideshowContainer>
+        <SlideImage 
+          src={images[currentSlide].src} 
+          alt={images[currentSlide].alt} 
+          key={currentSlide}
+        />
+        <PrevButton onClick={prevSlide}>←</PrevButton>
+        <NextButton onClick={nextSlide}>→</NextButton>
+        <DotContainer>
+          {images.map((_, index) => (
+            <Dot 
+              key={index} 
+              active={currentSlide === index}
+              onClick={() => goToSlide(index)}
+            />
+          ))}
+        </DotContainer>
+      </SlideshowContainer>
 
       <Footer />
     </CrewContainer>
