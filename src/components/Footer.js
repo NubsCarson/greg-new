@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import homeAdvisorIcon from '../../public/images/Icon1.png';
+import homeAdvisorIcon from '../images/Icon1.png';
 
 const FooterContainer = styled.footer`
   background: rgba(0, 0, 0, 0.2);
