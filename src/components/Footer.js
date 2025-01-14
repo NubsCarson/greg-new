@@ -52,9 +52,7 @@ function Footer() {
   return (
     <FooterContainer>
       <Certification>
-        <a href="https://www.homeadvisor.com" target="_blank" rel="noopener noreferrer">
-          <img src={homeAdvisorIcon} alt="Home Advisor Certified" />
-        </a>
+        <img src={homeAdvisorIcon} alt="Home Advisor Certified" />
       </Certification>
       <Copyright>
         © 2025 Affordable Drywall LLC. All Rights Reserved. NSCB License # 0090041

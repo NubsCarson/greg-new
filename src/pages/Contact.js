@@ -174,6 +174,26 @@ const ContactItem = styled.div`
   }
 `;
 
+const MessageAlert = styled.div`
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  animation: ${fadeIn} 0.3s ease-out;
+
+  &.success {
+    background: rgba(75, 181, 67, 0.2);
+    border: 1px solid rgba(75, 181, 67, 0.4);
+    color: #4bb543;
+  }
+
+  &.error {
+    background: rgba(255, 76, 76, 0.2);
+    border: 1px solid rgba(255, 76, 76, 0.4);
+    color: #ff4c4c;
+  }
+`;
+
 function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -181,33 +201,28 @@ function Contact() {
     phone: '',
     message: ''
   });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-  };
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <ContactContainer>
       <ContactContent>
         <ContactHeader>Contact Us</ContactHeader>
         <ContactGrid>
-          <ContactForm onSubmit={handleSubmit}>
+          <ContactForm 
+            action="https://formspree.io/f/affordabledrywall702@gmail.com" 
+            method="POST"
+          >
+            {status.message && (
+              <MessageAlert className={status.type}>
+                {status.message}
+              </MessageAlert>
+            )}
             <FormGroup>
               <Label>Name</Label>
               <Input
                 type="text"
                 name="name"
-                value={formData.name}
-                onChange={handleChange}
                 required
               />
             </FormGroup>
@@ -215,9 +230,7 @@ function Contact() {
               <Label>Email</Label>
               <Input
                 type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
+                name="_replyto"
                 required
               />
             </FormGroup>
@@ -226,8 +239,6 @@ function Contact() {
               <Input
                 type="tel"
                 name="phone"
-                value={formData.phone}
-                onChange={handleChange}
                 required
               />
             </FormGroup>
@@ -235,12 +246,13 @@ function Contact() {
               <Label>Message</Label>
               <TextArea
                 name="message"
-                value={formData.message}
-                onChange={handleChange}
                 required
               />
             </FormGroup>
-            <SubmitButton type="submit">Send Message</SubmitButton>
+            <input type="hidden" name="_subject" value="New Contact Form Submission" />
+            <SubmitButton type="submit">
+              Send Message
+            </SubmitButton>
           </ContactForm>
 
           <ContactInfo>
@@ -255,7 +267,7 @@ function Contact() {
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <a href="mailto:info@affordabledrywallnv.com">info@affordabledrywallnv.com</a>
+              <a href="mailto:affordabledrywall702@gmail.com">affordabledrywall702@gmail.com</a>
             </ContactItem>
             <ContactItem>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
