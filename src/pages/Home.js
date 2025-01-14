@@ -91,18 +91,6 @@ const HomeContainer = styled.div`
   }
 `;
 
-// const Logo = styled.img`
-//   max-width: 200px;
-//   height: auto;
-//   margin: 20px auto;
-//   display: block;
-//   border-radius: 50%;
-//   transition: transform 0.3s ease;
-//   &:hover {
-//     transform: scale(1.05);
-//   }
-// `;
-
 const MainContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -140,7 +128,9 @@ const MainContent = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
+    margin: 1rem auto;
+    gap: 1rem;
   }
 
   @keyframes rotate {
@@ -323,6 +313,10 @@ const AboutSection = styled.section`
   max-width: 1200px;
   margin: 0 auto;
   animation: ${fadeIn} 1s ease-out 0.6s backwards;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const AboutContent = styled.div`
@@ -352,6 +346,27 @@ const AboutContent = styled.div`
     padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+    padding: 1rem;
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .signature {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+    }
   }
 `;
 
@@ -390,16 +405,9 @@ const EstimateSection = styled.div`
   position: relative;
   overflow: hidden;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(77, 184, 255, 0.1) 0%, transparent 60%);
-    opacity: 0.5;
-    animation: rotate 20s linear infinite;
+  @media (max-width: 768px) {
+    margin: 1.5rem auto;
+    padding: 1.5rem 1rem;
   }
 `;
 
@@ -413,19 +421,8 @@ const EstimateTitle = styled.h2`
   animation: ${pulse} 2s infinite;
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-    100% {
-      transform: scale(1);
-    }
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -465,7 +462,9 @@ const EstimateText = styled.p`
   line-height: 1.6;
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    line-height: 1.4;
   }
 `;
 
@@ -531,10 +530,11 @@ const ReviewsSection = styled.section`
   }
 
   @media (max-width: 768px) {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
     
     h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
     }
   }
 `;
@@ -600,17 +600,9 @@ const HiringSection = styled.section`
   position: relative;
   overflow: visible;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(77, 184, 255, 0.1) 0%, transparent 60%);
-    opacity: 0.5;
-    animation: rotate 20s linear infinite;
-    pointer-events: none;
+  @media (max-width: 768px) {
+    margin: 1.5rem auto;
+    padding: 1.5rem 1rem;
   }
 `;
 
@@ -622,15 +614,11 @@ const HiringTitle = styled.h2`
   letter-spacing: 2px;
   text-shadow: 0 2px 10px rgba(77, 184, 255, 0.5);
   position: relative;
-  display: inline-block;
 
-  &::after {
-    content: '🔨';
-    position: absolute;
-    top: -15px;
-    right: -40px;
-    font-size: 2rem;
-    animation: ${pulse} 2s infinite;
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
   }
 `;
 
@@ -645,11 +633,15 @@ const HiringText = styled.p`
 `;
 
 const PositionsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  justify-content: center;
   margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    margin: 1rem 0;
+  }
 `;
 
 const PositionCard = styled.div`
@@ -657,28 +649,19 @@ const PositionCard = styled.div`
   padding: 1.5rem;
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  flex: 1;
-  min-width: 250px;
-  max-width: 300px;
   transition: all 0.3s ease;
 
-  &:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(77, 184, 255, 0.4);
-  }
+  @media (max-width: 768px) {
+    padding: 1rem;
 
-  h3 {
-    color: #4db8ff;
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-  }
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
 
-  p {
-    color: #fff;
-    opacity: 0.9;
-    font-size: 1.1rem;
-    line-height: 1.4;
+    p {
+      font-size: 1rem;
+    }
   }
 `;
 

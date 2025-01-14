@@ -77,13 +77,19 @@ const GalleryGrid = styled.div`
 `;
 
 const ImageCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+`;
+
+const ImageContainer = styled.div`
   position: relative;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   aspect-ratio: 4/3;
-  cursor: pointer;
 
   &:hover {
     transform: translateY(-5px);
@@ -102,20 +108,42 @@ const Image = styled.img`
   transition: transform 0.3s ease;
 `;
 
+const ImageTitle = styled.div`
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    padding: 0.3rem;
+  }
+`;
+
+const ExpandText = styled.div`
+  font-size: 1rem;
+  color: #4db8ff;
+  text-align: center;
+  padding: 0.3rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+`;
+
 const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  justify-content: space-between;
   padding: 1rem;
   text-align: center;
 
@@ -125,6 +153,11 @@ const Overlay = styled.div`
     color: white;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
   }
 
   .expand {
@@ -132,18 +165,27 @@ const Overlay = styled.div`
     color: #4db8ff;
     text-transform: none;
     letter-spacing: normal;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
-  ${ImageCard}:hover & {
+  ${ImageCard}:hover .expand {
     opacity: 1;
   }
 
   @media (max-width: 768px) {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+    
     .type {
       font-size: 1.5rem;
+      padding: 0.3rem;
     }
+
     .expand {
-      font-size: 0.9rem;
+      display: none;
     }
   }
 `;
@@ -243,11 +285,11 @@ function OurWork() {
       <GalleryGrid>
         {workImages.map((image, index) => (
           <ImageCard key={index} onClick={() => setSelectedImage(image)}>
-            <Image src={image.src} alt={image.alt} loading="lazy" />
-            <Overlay>
-              <div className="type">{image.type}</div>
-              <div className="expand">Click to expand image</div>
-            </Overlay>
+            <ImageTitle>{image.type}</ImageTitle>
+            <ImageContainer>
+              <Image src={image.src} alt={image.alt} loading="lazy" />
+            </ImageContainer>
+            <ExpandText>Click to expand image</ExpandText>
           </ImageCard>
         ))}
       </GalleryGrid>
