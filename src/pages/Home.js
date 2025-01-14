@@ -284,25 +284,6 @@ const WorkImage = styled.img`
   }
 `;
 
-const Certifications = styled.div`
-  text-align: center;
-  margin-top: 4rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  
-  img {
-    height: 150px;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-`;
-
 const EstimateSection = styled.div`
   text-align: center;
   margin: 4rem auto;
@@ -501,9 +482,6 @@ function Home() {
             <p>Affordable Drywall</p>
           </div>
         </AboutContent>
-        <Certifications>
-          <img src="images/Home-Advisor-Logo-300x232.jpg" alt="Home Advisor Certification" />
-        </Certifications>
       </AboutSection>
 
       {selectedImage && (
