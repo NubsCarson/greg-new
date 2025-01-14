@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
@@ -53,48 +52,6 @@ const Logo = styled.img`
     transform: scale(1.02);
     filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
     background: rgba(255, 255, 255, 0.1);
-  }
-`;
-
-const Navigation = styled.nav`
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 1rem;
-  margin: 1rem auto;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
-  backdrop-filter: blur(5px);
-  
-  @media (max-width: 768px) {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0.5rem;
-    border-radius: 25px;
-    margin: 0.5rem;
-  }
-  
-  a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-    padding: 0.5rem 1rem;
-    transition: all 0.3s ease;
-    border-radius: 25px;
-    
-    @media (max-width: 768px) {
-      font-size: 0.9rem;
-      padding: 0.4rem 0.8rem;
-      flex: 1;
-      text-align: center;
-      min-width: 80px;
-    }
-    
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
-    }
   }
 `;
 
@@ -352,93 +309,45 @@ const Certifications = styled.div`
   }
 `;
 
-const ServicesSection = styled.div`
+const EstimateSection = styled.div`
+  text-align: center;
+  margin: 4rem auto;
+  padding: 3rem 2rem;
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 2rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
   animation: ${fadeIn} 1s ease-out;
+  position: relative;
+  overflow: hidden;
 
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(77, 184, 255, 0.1) 0%, transparent 60%);
+    opacity: 0.5;
+    animation: rotate 20s linear infinite;
   }
 `;
 
-const ServicesList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-    margin-top: 1rem;
-  }
-`;
-
-const ServiceItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  @media (max-width: 768px) {
-    padding: 0.8rem;
-    gap: 0.8rem;
-  }
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .icon {
-    font-size: 1.5rem;
-    color: #4db8ff;
-    min-width: 2rem;
-    text-align: center;
-
-    @media (max-width: 768px) {
-      font-size: 1.2rem;
-      min-width: 1.5rem;
-    }
-  }
-
-  .text {
-    font-size: 1.1rem;
-    color: white;
-
-    @media (max-width: 768px) {
-      font-size: 1rem;
-    }
-  }
-`;
-
-const FreeEstimate = styled.div`
-  text-align: center;
-  margin-top: 2rem;
-  padding: 1rem;
-  font-size: 1.5rem;
-  color: #4db8ff;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
+const EstimateTitle = styled.h2`
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #4db8ff 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   animation: pulse 2s infinite;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 
   @keyframes pulse {
     0% {
@@ -450,6 +359,43 @@ const FreeEstimate = styled.div`
     100% {
       transform: scale(1);
     }
+  }
+`;
+
+const EstimatePhone = styled.a`
+  display: inline-block;
+  padding: 1.5rem 3rem;
+  font-size: 2rem;
+  color: white;
+  background: rgba(77, 184, 255, 0.2);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(77, 184, 255, 0.3);
+  margin-top: 1rem;
+  font-weight: bold;
+
+  &:hover {
+    background: rgba(77, 184, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(77, 184, 255, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+  }
+`;
+
+const EstimateText = styled.p`
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 1.5rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
   }
 `;
 
@@ -503,15 +449,6 @@ function Home() {
 
   return (
     <HomeContainer>
-      <Logo src="images/Logo.png" alt="Affordable Drywall Logo" />
-      <Navigation>
-        <Link to="/">Home</Link>
-        <Link to="/services">Our Services</Link>
-        <Link to="/our-crew">Our Crew</Link>
-        <Link to="/our-work">Gallery</Link>
-        <Link to="/contact">Contact</Link>
-      </Navigation>
-
       <MainContent>
         <CompanyInfo>
           <h1>Affordable Drywall LLC.</h1>
@@ -526,52 +463,16 @@ function Home() {
         </LicenseInfo>
       </MainContent>
 
-      <ServicesSection>
-        <h2>Our Services</h2>
-        <ServicesList>
-          <ServiceItem>
-            <span className="icon">🏗️</span>
-            <span className="text">New Construction</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🔨</span>
-            <span className="text">Drywall Installation and Finishing</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🔧</span>
-            <span className="text">Repairs</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">💧</span>
-            <span className="text">Water Damage</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🔄</span>
-            <span className="text">Popcorn Ceiling Removal</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🎨</span>
-            <span className="text">Texture Matching</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🛠️</span>
-            <span className="text">Stress Cracks & Corner Dents</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🔊</span>
-            <span className="text">Soundproofing</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">🎯</span>
-            <span className="text">Professional Painting</span>
-          </ServiceItem>
-          <ServiceItem>
-            <span className="icon">✨</span>
-            <span className="text">And More...</span>
-          </ServiceItem>
-        </ServicesList>
-        <FreeEstimate>FREE ESTIMATES</FreeEstimate>
-      </ServicesSection>
+      <EstimateSection>
+        <EstimateTitle>FREE ESTIMATES</EstimateTitle>
+        <EstimateText>
+          Get a professional assessment for your drywall project today!
+          No obligation, no pressure - just expert advice and competitive pricing.
+        </EstimateText>
+        <EstimatePhone href="tel:702-497-0477">
+          📞 Call (702) 497-0477
+        </EstimatePhone>
+      </EstimateSection>
 
       <AboutSection>
         <WorkImage 

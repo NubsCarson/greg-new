@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
@@ -182,24 +181,13 @@ const PhotoCard = styled.div`
   }
 `;
 
-const OurCrew = () => {
+function OurCrew() {
   return (
     <CrewContainer>
-      <Link to="/">
-        <Logo src="images/Logo.png" alt="Affordable Drywall Logo" />
-      </Link>
-      <Navigation>
-        <Link to="/">Home</Link>
-        <Link to="/services">Our Services</Link>
-        <Link to="/our-crew">Our Crew</Link>
-        <Link to="/our-work">Gallery</Link>
-        <Link to="/contact">Contact</Link>
-      </Navigation>
-
       <Header>
-        <Title>Our Team</Title>
+        <Title>Our Crew</Title>
       </Header>
-
+      
       <TeamSection>
         <TeamDescription>
           At Affordable Drywall, our team is the heartbeat of our operations. United by a shared commitment to craftsmanship and customer satisfaction, our team of seasoned drywall professionals brings a wealth of experience to every project. Each member is a skilled craftsman, meticulously trained in the latest techniques and safety protocols to ensure the highest standards of quality. From precise installations to seamless finishes, our dedicated team works tirelessly to transform your spaces with skill, precision, and an eye for detail.
@@ -218,6 +206,6 @@ const OurCrew = () => {
       <Footer />
     </CrewContainer>
   );
-};
+}
 
 export default OurCrew; 
