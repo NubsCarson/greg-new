@@ -14,97 +14,109 @@ const fadeIn = keyframes`
 `;
 
 const ServicesContainer = styled.div`
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, #005580 0%, #003854 100%);
-  color: white;
   min-height: 100vh;
-  animation: ${fadeIn} 1s ease-out;
-  position: relative;
-  overflow: hidden;
+  padding: 1rem;
+  background: linear-gradient(135deg, #003854 0%, #005580 100%);
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('images/texture.png') repeat;
-    opacity: 0.05;
-    pointer-events: none;
+  @media (min-width: 769px) {
+    padding: 2rem;
   }
 `;
 
-const Header = styled.header`
+const Header = styled.div`
   text-align: center;
-  padding: 3rem 2rem;
+  margin-bottom: 2rem;
   animation: ${fadeIn} 1s ease-out;
 
-  @media (max-width: 768px) {
-    padding: 2rem 1rem;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 768px) {
+  h1 {
     font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: -1px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #b3e0ff;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media (min-width: 769px) {
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
   }
 `;
 
 const ServiceGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+  margin: 0 auto;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 0 1rem;
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 `;
 
 const ServiceCard = styled.div`
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 2rem;
+  border-radius: 15px;
+  padding: 1.5rem;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: ${fadeIn} 1s ease-out;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
 
-    &::before {
-      transform: translateX(100%);
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #4db8ff;
+    font-weight: 600;
+  }
+
+  p {
+    color: #e6e6e6;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 769px) {
+    padding: 2rem;
+    border-radius: 20px;
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1.1rem;
     }
   }
 `;
@@ -113,44 +125,19 @@ const ServiceIcon = styled.div`
   font-size: 2.5rem;
   margin-bottom: 1rem;
   color: #4db8ff;
-  text-shadow: 0 0 10px rgba(77, 184, 255, 0.3);
-`;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(77, 184, 255, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
 
-const ServiceTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #ffffff;
-`;
-
-const ServiceDescription = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-`;
-
-const ContactSection = styled.div`
-  text-align: center;
-  margin: 4rem auto;
-  padding: 2rem;
-  max-width: 800px;
-  animation: ${fadeIn} 1s ease-out;
-`;
-
-const ContactButton = styled.a`
-  display: inline-block;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  color: white;
-  background: rgba(77, 184, 255, 0.2);
-  border-radius: 50px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(77, 184, 255, 0.3);
-
-  &:hover {
-    background: rgba(77, 184, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(77, 184, 255, 0.2);
+  @media (min-width: 769px) {
+    font-size: 3rem;
+    width: 80px;
+    height: 80px;
   }
 `;
 
@@ -158,88 +145,85 @@ function Services() {
   return (
     <ServicesContainer>
       <Header>
-        <Title>Our Services</Title>
+        <h1>Our Services</h1>
+        <p>
+          Complete drywall solutions for new construction projects, ensuring quality installation from start to finish.
+        </p>
       </Header>
 
       <ServiceGrid>
         <ServiceCard>
           <ServiceIcon>🏗️</ServiceIcon>
-          <ServiceTitle>New Construction</ServiceTitle>
-          <ServiceDescription>
+          <h2>New Construction</h2>
+          <p>
             Complete drywall solutions for new construction projects, ensuring quality installation from start to finish.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🔨</ServiceIcon>
-          <ServiceTitle>Drywall Installation and Finishing</ServiceTitle>
-          <ServiceDescription>
+          <h2>Drywall Installation and Finishing</h2>
+          <p>
             Professional installation and finishing services with attention to detail and superior craftsmanship.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🔧</ServiceIcon>
-          <ServiceTitle>Repairs</ServiceTitle>
-          <ServiceDescription>
+          <h2>Repairs</h2>
+          <p>
             Expert repair services for all types of drywall damage, restoring your walls to pristine condition.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>💧</ServiceIcon>
-          <ServiceTitle>Water Damage</ServiceTitle>
-          <ServiceDescription>
+          <h2>Water Damage</h2>
+          <p>
             Specialized repair and restoration services for water-damaged drywall, preventing mold and future issues.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🔄</ServiceIcon>
-          <ServiceTitle>Popcorn Ceiling Removal</ServiceTitle>
-          <ServiceDescription>
+          <h2>Popcorn Ceiling Removal</h2>
+          <p>
             Professional removal of popcorn ceilings, updating your space with a modern, clean look.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🎨</ServiceIcon>
-          <ServiceTitle>Texture Matching</ServiceTitle>
-          <ServiceDescription>
+          <h2>Texture Matching</h2>
+          <p>
             Expert texture matching services to seamlessly blend repairs with existing walls and ceilings.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🛠️</ServiceIcon>
-          <ServiceTitle>Stress Cracks & Corner Dents</ServiceTitle>
-          <ServiceDescription>
+          <h2>Stress Cracks & Corner Dents</h2>
+          <p>
             Precise repair of stress cracks and corner damage, restoring structural integrity and appearance.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🔊</ServiceIcon>
-          <ServiceTitle>Soundproofing</ServiceTitle>
-          <ServiceDescription>
+          <h2>Soundproofing</h2>
+          <p>
             Professional soundproofing solutions for residential and commercial spaces, enhancing acoustic comfort.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
 
         <ServiceCard>
           <ServiceIcon>🎯</ServiceIcon>
-          <ServiceTitle>Professional Painting</ServiceTitle>
-          <ServiceDescription>
+          <h2>Professional Painting</h2>
+          <p>
             Complete painting services with premium materials and expert application for a perfect finish.
-          </ServiceDescription>
+          </p>
         </ServiceCard>
       </ServiceGrid>
-
-      <ContactSection>
-        <ContactButton href="tel:702-497-0477">
-          Get Your Free Estimate: 702-497-0477
-        </ContactButton>
-      </ContactSection>
 
       <Footer />
     </ServicesContainer>
