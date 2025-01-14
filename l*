@@ -1,0 +1,10 @@
+user.name=NubsCarson
+user.email=nubscarson@proton.me
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=git@github.com:NubsCarson/greg-new.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
