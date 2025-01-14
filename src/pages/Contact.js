@@ -187,6 +187,19 @@ const SubmitButton = styled.button`
   }
 `;
 
+const ProcessingNote = styled.p`
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+
+  @media (min-width: 769px) {
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+  }
+`;
+
 const ContactInfo = styled.div`
   background: rgba(0, 0, 0, 0.2);
   padding: 1.25rem;
@@ -277,14 +290,16 @@ function Contact() {
                 type="text"
                 name="name"
                 required
+                placeholder="Your name"
               />
             </FormGroup>
             <FormGroup>
               <Label>Email</Label>
               <Input
                 type="email"
-                name="_replyto"
+                name="email"
                 required
+                placeholder="Your email"
               />
             </FormGroup>
             <FormGroup>
@@ -293,6 +308,7 @@ function Contact() {
                 type="tel"
                 name="phone"
                 required
+                placeholder="Your phone number"
               />
             </FormGroup>
             <FormGroup>
@@ -300,12 +316,14 @@ function Contact() {
               <TextArea
                 name="message"
                 required
+                placeholder="Your message"
               />
             </FormGroup>
             <input type="hidden" name="_subject" value="New Contact Form Submission" />
             <SubmitButton type="submit">
               Send Message
             </SubmitButton>
+            <ProcessingNote>Processing may take up to 30 seconds</ProcessingNote>
           </ContactForm>
 
           <ContactInfo>
