@@ -31,7 +31,7 @@ const HomeContainer = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('images/texture.png') repeat;
+    background: url('/images/texture.png') repeat;
     opacity: 0.05;
     pointer-events: none;
   }
