@@ -25,9 +25,36 @@ const Copyright = styled.p`
   }
 `;
 
+const Certification = styled.div`
+  margin-bottom: 1.5rem;
+  
+  img {
+    height: 180px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    
+    img {
+      height: 140px;
+    }
+  }
+`;
+
 function Footer() {
   return (
     <FooterContainer>
+      <Certification>
+        <a href="https://www.homeadvisor.com" target="_blank" rel="noopener noreferrer">
+          <img src="/images/Home+Advisor+Icon.png" alt="Home Advisor Certified" />
+        </a>
+      </Certification>
       <Copyright>
         © 2025 Affordable Drywall LLC. All Rights Reserved. NSCB License # 0090041
       </Copyright>
