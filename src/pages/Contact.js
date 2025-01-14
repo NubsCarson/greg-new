@@ -195,15 +195,6 @@ const MessageAlert = styled.div`
 `;
 
 function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [status, setStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   return (
     <ContactContainer>
       <ContactContent>
@@ -213,11 +204,6 @@ function Contact() {
             action="https://formspree.io/f/affordabledrywall702@gmail.com" 
             method="POST"
           >
-            {status.message && (
-              <MessageAlert className={status.type}>
-                {status.message}
-              </MessageAlert>
-            )}
             <FormGroup>
               <Label>Name</Label>
               <Input
