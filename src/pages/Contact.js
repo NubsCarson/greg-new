@@ -174,26 +174,6 @@ const ContactItem = styled.div`
   }
 `;
 
-const MessageAlert = styled.div`
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  animation: ${fadeIn} 0.3s ease-out;
-
-  &.success {
-    background: rgba(75, 181, 67, 0.2);
-    border: 1px solid rgba(75, 181, 67, 0.4);
-    color: #4bb543;
-  }
-
-  &.error {
-    background: rgba(255, 76, 76, 0.2);
-    border: 1px solid rgba(255, 76, 76, 0.4);
-    color: #ff4c4c;
-  }
-`;
-
 function Contact() {
   return (
     <ContactContainer>
