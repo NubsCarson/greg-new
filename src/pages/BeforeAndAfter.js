@@ -91,6 +91,10 @@ const SmallImagesGrid = styled.div`
   }
 `;
 
+const AdditionalGalleryGrid = styled(GalleryGrid)`
+  margin-top: 2rem;
+`;
+
 const ImageCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -196,10 +200,20 @@ const CloseButton = styled.button`
 
 const SmallImageCard = styled(ImageCard)`
   max-width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 const SmallImageContainer = styled(ImageContainer)`
   aspect-ratio: 3/2;
+  margin-bottom: 0.5rem;
 `;
 
 const BeforeAndAfter = () => {
@@ -256,6 +270,29 @@ const BeforeAndAfter = () => {
     }
   ];
 
+  const additionalImages = [
+    {
+      src: "images/work/aftera.jpg",
+      alt: "Project After A",
+      type: "After"
+    },
+    {
+      src: "images/work/beforea.jpg",
+      alt: "Project Before A",
+      type: "Before"
+    },
+    {
+      src: "images/work/beforeb.jpg",
+      alt: "Project Before B",
+      type: "Before"
+    },
+    {
+      src: "images/work/afterb.jpg",
+      alt: "Project After B",
+      type: "After"
+    }
+  ];
+
   return (
     <WorkContainer>
       <Header>
@@ -284,6 +321,17 @@ const BeforeAndAfter = () => {
           </SmallImageCard>
         ))}
       </SmallImagesGrid>
+      <AdditionalGalleryGrid>
+        {additionalImages.map((image, index) => (
+          <ImageCard key={index} onClick={() => setSelectedImage(image)}>
+            <ImageContainer>
+              <Image src={image.src} alt={image.alt} loading="lazy" />
+            </ImageContainer>
+            <ImageTitle>{image.type}</ImageTitle>
+            <ExpandText>Click to expand image</ExpandText>
+          </ImageCard>
+        ))}
+      </AdditionalGalleryGrid>
       {selectedImage && (
         <Modal onClick={() => setSelectedImage(null)}>
           <ModalImage src={selectedImage.src} alt={selectedImage.alt} onClick={e => e.stopPropagation()} />
