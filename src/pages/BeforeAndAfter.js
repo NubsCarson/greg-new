@@ -202,7 +202,7 @@ const SmallImageContainer = styled(ImageContainer)`
   aspect-ratio: 3/2;
 `;
 
-function BeforeAndAfter() {
+const BeforeAndAfter = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const mainImages = [
@@ -259,52 +259,40 @@ function BeforeAndAfter() {
   return (
     <WorkContainer>
       <Header>
-        <Title>Before and After</Title>
-        <Subtitle>
-          Browse through our portfolio of completed projects showcasing our commitment to quality 
-          craftsmanship and attention to detail. Each project represents our dedication to delivering 
-          exceptional drywall solutions for our clients.
-        </Subtitle>
+        <Title>Before and After Gallery</Title>
+        <Subtitle>Explore our transformative work through these before and after comparisons</Subtitle>
       </Header>
-
       <GalleryGrid>
         {mainImages.map((image, index) => (
           <ImageCard key={index} onClick={() => setSelectedImage(image)}>
-            <ImageTitle>{image.type}</ImageTitle>
             <ImageContainer>
               <Image src={image.src} alt={image.alt} loading="lazy" />
             </ImageContainer>
+            <ImageTitle>{image.type}</ImageTitle>
             <ExpandText>Click to expand image</ExpandText>
           </ImageCard>
         ))}
       </GalleryGrid>
-
       <SmallImagesGrid>
         {smallImages.map((image, index) => (
           <SmallImageCard key={index} onClick={() => setSelectedImage(image)}>
-            <ImageTitle>{image.type}</ImageTitle>
             <SmallImageContainer>
               <Image src={image.src} alt={image.alt} loading="lazy" />
             </SmallImageContainer>
+            <ImageTitle>{image.type}</ImageTitle>
             <ExpandText>Click to expand image</ExpandText>
           </SmallImageCard>
         ))}
       </SmallImagesGrid>
-
       {selectedImage && (
         <Modal onClick={() => setSelectedImage(null)}>
-          <ModalImage 
-            src={selectedImage.src} 
-            alt={selectedImage.alt} 
-            onClick={e => e.stopPropagation()} 
-          />
+          <ModalImage src={selectedImage.src} alt={selectedImage.alt} onClick={e => e.stopPropagation()} />
           <CloseButton onClick={() => setSelectedImage(null)}>×</CloseButton>
         </Modal>
       )}
-
       <Footer />
     </WorkContainer>
   );
-}
+};
 
 export default BeforeAndAfter; 
