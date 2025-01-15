@@ -170,10 +170,13 @@ const Dot = styled.button`
 function OurCrew() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    { src: "/images/crew/crew1.jpg", alt: "Crew Member 1" },
-    { src: "/images/crew/crew2.jpg", alt: "Crew Member 2" },
-    { src: "/images/crew/crew3.jpg", alt: "Crew Member 3" },
-    { src: "/images/crew/crew4.png", alt: "Crew Member 4" }
+    { src: "/images/crew/crew1.jpg?v=1", alt: "Crew Member 1" },
+    { src: "/images/crew/crew2.jpg?v=1", alt: "Crew Member 2" },
+    { src: "/images/crew/crew3.jpg?v=1", alt: "Crew Member 3" },
+    { src: "/images/crew/crew4.png?v=1", alt: "Crew Member 4" },
+    { src: "/images/crew/team1.jpg?v=1", alt: "Team Member 1" },
+    { src: "/images/crew/team2.jpg?v=1", alt: "Team Member 2" },
+    { src: "/images/crew/team3.jpg?v=1", alt: "Team Member 3" }
   ];
 
   useEffect(() => {

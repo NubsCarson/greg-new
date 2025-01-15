@@ -169,10 +169,10 @@ function SoundProofing() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const images = [
-    { src: "/images/sp/sp1.jpg", alt: "Sound Proofing Project - View 1" },
-    { src: "/images/sp/sp2.jpg", alt: "Sound Proofing Project - View 2" },
-    { src: "/images/sp/sp3.jpg", alt: "Sound Proofing Project - View 3" },
-    { src: "/images/sp/sp4.jpg", alt: "Sound Proofing Project - View 4" }
+    { src: "/images/SP/sp1.jpg?v=1", alt: "Sound Proofing Project - View 1" },
+    { src: "/images/SP/sp2.jpg?v=1", alt: "Sound Proofing Project - View 2" },
+    { src: "/images/SP/sp3.jpg?v=1", alt: "Sound Proofing Project - View 3" },
+    { src: "/images/SP/sp4.jpg?v=1", alt: "Sound Proofing Project - View 4" }
   ];
 
   useEffect(() => {
@@ -204,7 +204,7 @@ function SoundProofing() {
     <PageContainer>
       <Header>
         <h1>Sound Proofing</h1>
-        <p>Create a quieter, more peaceful environment with our professional sound proofing solutions.</p>
+        <p>Create a quieter, more peaceful environment with our professional sound proofing solutions. We specialize in noise reduction and acoustic improvements.</p>
       </Header>
 
       {images.length > 0 && (
