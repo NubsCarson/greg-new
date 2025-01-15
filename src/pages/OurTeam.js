@@ -13,7 +13,7 @@ const fadeIn = keyframes`
   }
 `;
 
-const CrewContainer = styled.div`
+const TeamContainer = styled.div`
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(135deg, #003854 0%, #005580 100%);
@@ -167,16 +167,16 @@ const Dot = styled.button`
   }
 `;
 
-function OurCrew() {
+function OurTeam() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const images = [
-    { src: "/images/crew/crew1.jpg?v=1", alt: "Crew Member 1" },
-    { src: "/images/crew/crew2.jpg?v=1", alt: "Crew Member 2" },
-    { src: "/images/crew/crew3.jpg?v=1", alt: "Crew Member 3" },
-    { src: "/images/crew/crew4.png?v=1", alt: "Crew Member 4" },
-    { src: "/images/crew/team1.jpg?v=1", alt: "Team Member 1" },
-    { src: "/images/crew/team2.jpg?v=1", alt: "Team Member 2" },
-    { src: "/images/crew/team3.jpg?v=1", alt: "Team Member 3" }
+    { src: "/images/team/crew1.jpg?v=1", alt: "Team Member 1" },
+    { src: "/images/team/crew2.jpg?v=1", alt: "Team Member 2" },
+    { src: "/images/team/crew3.jpg?v=1", alt: "Team Member 3" },
+    { src: "/images/team/crew4.png?v=1", alt: "Team Member 4" },
+    { src: "/images/team/team1.jpg?v=1", alt: "Team Member 5" },
+    { src: "/images/team/team2.jpg?v=1", alt: "Team Member 6" },
+    { src: "/images/team/team3.jpg?v=1", alt: "Team Member 7" }
   ];
 
   useEffect(() => {
@@ -196,12 +196,12 @@ function OurCrew() {
   };
 
   return (
-    <CrewContainer>
+    <TeamContainer>
       <Header>
-        <Title>Our Crew</Title>
+        <Title>Our Team</Title>
         <Subtitle>
           Meet the skilled professionals who make up our dedicated team. With years of experience
-          and a commitment to excellence, our crew delivers outstanding results on every project.
+          and a commitment to excellence, our team delivers outstanding results on every project.
         </Subtitle>
       </Header>
 
@@ -229,8 +229,8 @@ function OurCrew() {
       </SlideshowContainer>
 
       <Footer />
-    </CrewContainer>
+    </TeamContainer>
   );
 }
 
-export default OurCrew; 
+export default OurTeam; 

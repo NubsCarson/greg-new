@@ -149,7 +149,7 @@ function Navigation() {
         <NavLink to="/" onClick={handleLinkClick}>Home</NavLink>
         <NavLink to="/services" onClick={handleLinkClick}>Services</NavLink>
         <NavLink to="/before-and-after" onClick={handleLinkClick}>Before and After</NavLink>
-        <NavLink to="/our-crew" onClick={handleLinkClick}>Our Crew</NavLink>
+        <NavLink to="/our-team" onClick={handleLinkClick}>Our Team</NavLink>
         <NavLink to="/contact" onClick={handleLinkClick}>Contact</NavLink>
         <NavLink to="/hand-texturing" onClick={handleLinkClick}>Hand Texturing</NavLink>
         <NavLink to="/fast-service" onClick={handleLinkClick}>Fast and Friendly Service</NavLink>

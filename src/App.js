@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import BeforeAndAfter from './pages/BeforeAndAfter';
-import OurCrew from './pages/OurCrew';
+import OurTeam from './pages/OurTeam';
 import Contact from './pages/Contact';
 import HandTexturing from './pages/HandTexturing';
 import FastService from './pages/FastService';
@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/before-and-after" element={<BeforeAndAfter />} />
-        <Route path="/our-crew" element={<OurCrew />} />
+        <Route path="/our-team" element={<OurTeam />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/hand-texturing" element={<HandTexturing />} />
         <Route path="/fast-service" element={<FastService />} />
