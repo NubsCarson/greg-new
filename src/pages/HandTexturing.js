@@ -3,141 +3,177 @@ import styled, { keyframes } from 'styled-components';
 import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 `;
 
-const slideIn = keyframes`
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
+const shine = keyframes`
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 `;
 
 const PageContainer = styled.div`
+  width: 100%;
   min-height: 100vh;
+  background: linear-gradient(135deg, #003854 0%, #005580 100%);
+  color: white;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  animation: ${fadeIn} 0.5s ease-in-out;
+  align-items: center;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #005580 0%, #003854 100%);
-  color: white;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 1200px;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
   }
 
   p {
     font-size: 1.2rem;
+    line-height: 1.6;
     max-width: 800px;
     margin: 0 auto;
-    opacity: 0.9;
-  }
+    color: #e9ecef;
 
-  @media (max-width: 768px) {
-    padding: 1.5rem 1rem;
-    
-    h1 {
-      font-size: 2rem;
-    }
-    
-    p {
+    @media (max-width: 768px) {
       font-size: 1rem;
+      line-height: 1.4;
     }
   }
 `;
 
 const SlideshowContainer = styled.div`
-  position: relative;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto 2rem;
   aspect-ratio: 16/9;
-  background: white;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  margin: 0 auto 2rem auto;
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    aspect-ratio: 9/16;
+    height: 70vh;
+    max-height: 800px;
+  }
 `;
 
 const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  animation: ${slideIn} 0.5s ease-in-out;
-  background: #f8f9fa;
-  padding: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: ${props => (props.active ? 1 : 0)};
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  transform: scale(${props => (props.active ? 1 : 1.1)});
+  padding: 0.5rem;
 `;
 
-const NavigationButton = styled.button`
+const NavButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.2);
   color: white;
   border: none;
-  padding: 1rem;
-  cursor: pointer;
-  font-size: 1.5rem;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  z-index: 2;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
   }
+
+  ${props => props.left ? 'left: 20px;' : 'right: 20px;'}
 
   @media (max-width: 768px) {
-    padding: 0.75rem;
-    font-size: 1.2rem;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    ${props => props.left ? 'left: 10px;' : 'right: 10px;'}
   }
-`;
-
-const PrevButton = styled(NavigationButton)`
-  left: 1rem;
-`;
-
-const NextButton = styled(NavigationButton)`
-  right: 1rem;
 `;
 
 const DotContainer = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+  gap: 12px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+
+  @media (max-width: 768px) {
+    bottom: 10px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
 `;
 
 const Dot = styled.button`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: none;
-  background: ${props => props.active ? '#005580' : '#ccc'};
+  border: 2px solid white;
+  background: ${props => props.active ? 'white' : 'transparent'};
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background: ${props => props.active ? '#005580' : '#999'};
+    transform: scale(1.2);
   }
 `;
 
 function HandTexturing() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
   const images = [
     { src: "/images/HT/ht1.jpg", alt: "Hand Texturing Example 1" },
     { src: "/images/HT/ht2.jpg", alt: "Hand Texturing Example 2" },
@@ -148,28 +184,19 @@ function HandTexturing() {
   ];
 
   useEffect(() => {
-    let interval;
-    if (isAutoPlaying) {
-      interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % images.length);
-      }, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, images.length]);
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 5000);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length);
-    setIsAutoPlaying(false);
-  };
+    return () => clearInterval(timer);
+  }, [images.length]);
 
-  const prevSlide = () => {
+  const handlePrevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
-    setIsAutoPlaying(false);
   };
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false);
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
   };
 
   return (
@@ -180,24 +207,27 @@ function HandTexturing() {
       </Header>
       
       <SlideshowContainer>
-        <SlideImage
-          key={currentSlide}
-          src={images[currentSlide].src}
-          alt={images[currentSlide].alt}
-        />
-        <PrevButton onClick={prevSlide}>←</PrevButton>
-        <NextButton onClick={nextSlide}>→</NextButton>
-      </SlideshowContainer>
-
-      <DotContainer>
-        {images.map((_, index) => (
-          <Dot
-            key={index}
-            active={currentSlide === index}
-            onClick={() => goToSlide(index)}
+        {images.map((image, index) => (
+          <SlideImage
+            key={image.src}
+            src={image.src}
+            alt={image.alt}
+            active={index === currentSlide}
+            loading="lazy"
           />
         ))}
-      </DotContainer>
+        <NavButton left onClick={handlePrevSlide}>&lt;</NavButton>
+        <NavButton onClick={handleNextSlide}>&gt;</NavButton>
+        <DotContainer>
+          {images.map((_, index) => (
+            <Dot
+              key={index}
+              active={index === currentSlide}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
+        </DotContainer>
+      </SlideshowContainer>
 
       <Footer />
     </PageContainer>

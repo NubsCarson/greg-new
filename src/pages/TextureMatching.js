@@ -3,52 +3,70 @@ import styled, { keyframes } from 'styled-components';
 import Footer from '../components/Footer';
 
 const fadeIn = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const shine = keyframes`
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 `;
 
 const PageContainer = styled.div`
+  width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #003854 0%, #005580 100%);
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: ${fadeIn} 0.5s ease-in;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   text-align: center;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, #005580 0%, #003854 100%);
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 1200px;
+  margin-bottom: 2rem;
+  border-radius: 15px;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 
   h1 {
-    color: white;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ffffff 0%, #e6e6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
   }
 
   p {
-    color: #e9ecef;
     font-size: 1.2rem;
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto;
-  }
+    color: #e9ecef;
 
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-    h1 {
-      font-size: 2rem;
-    }
-    p {
+    @media (max-width: 768px) {
       font-size: 1rem;
+      line-height: 1.4;
     }
   }
 `;
@@ -58,11 +76,19 @@ const SlideshowContainer = styled.div`
   max-width: 1200px;
   aspect-ratio: 16/9;
   position: relative;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    aspect-ratio: 9/16;
+    height: 70vh;
+    max-height: 800px;
+  }
 `;
 
 const SlideImage = styled.img`
@@ -73,7 +99,8 @@ const SlideImage = styled.img`
   top: 0;
   left: 0;
   opacity: ${props => (props.active ? 1 : 0)};
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  transform: scale(${props => (props.active ? 1 : 1.1)});
   padding: 0.5rem;
 `;
 
@@ -81,7 +108,7 @@ const NavButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 85, 128, 0.8);
+  background: rgba(255, 255, 255, 0.2);
   color: white;
   border: none;
   border-radius: 50%;
@@ -92,19 +119,22 @@ const NavButton = styled.button`
   justify-content: center;
   cursor: pointer;
   font-size: 24px;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
   z-index: 2;
 
   &:hover {
-    background: rgba(0, 85, 128, 1);
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1);
   }
 
-  ${props => props.left ? 'left: 10px;' : 'right: 10px;'}
+  ${props => props.left ? 'left: 20px;' : 'right: 20px;'}
 
   @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    ${props => props.left ? 'left: 10px;' : 'right: 10px;'}
   }
 `;
 
@@ -114,21 +144,31 @@ const DotContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 12px;
   z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+
+  @media (max-width: 768px) {
+    bottom: 10px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
 `;
 
 const Dot = styled.button`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: none;
-  background: ${props => props.active ? '#005580' : 'rgba(255, 255, 255, 0.5)'};
+  border: 2px solid white;
+  background: ${props => props.active ? 'white' : 'transparent'};
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: ${props => props.active ? '#005580' : 'rgba(255, 255, 255, 0.8)'};
+    transform: scale(1.2);
   }
 `;
 
