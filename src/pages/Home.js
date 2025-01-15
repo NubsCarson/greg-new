@@ -368,7 +368,7 @@ function Home() {
       <HeroSection>
         <HeroContent>
           <h1>Affordable Drywall LLC</h1>
-          <div className="services">Full Service Drywall & Paint Company</div>
+          <div className="services">Your Local Full Service Drywall & Paint Company</div>
           <a href="tel:702-497-0477" className="phone">(702) 497-0477</a>
           <div className="location">Vegas, Henderson, and surrounding areas</div>
         </HeroContent>
@@ -397,7 +397,7 @@ function Home() {
 
       <EstimateSection>
         <h2>Free Estimates</h2>
-        <p>Contact us today for a free estimate on your drywall project. We're committed to providing quality service at competitive prices.</p>
+        <p>Contact us today for a free estimate on your drywall and paint projects. We're committed to providing quality service at competitive prices.</p>
         <a href="tel:702-497-0477" className="phone">(702) 497-0477</a>
       </EstimateSection>
 
