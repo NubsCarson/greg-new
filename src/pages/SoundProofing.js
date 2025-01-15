@@ -36,6 +36,8 @@ const Header = styled.header`
   text-align: center;
   padding: 2rem 1rem;
   background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  border-radius: 15px;
 
   h1 {
     font-size: 2.5rem;
@@ -54,11 +56,16 @@ const Header = styled.header`
     line-height: 1.6;
   }
 
-  @media (min-width: 769px) {
-    padding: 3rem 2rem;
-
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+    
     h1 {
-      font-size: 3rem;
+      font-size: 2rem;
+    }
+    
+    p {
+      font-size: 1rem;
+      line-height: 1.4;
     }
   }
 `;
@@ -72,64 +79,94 @@ const SlideshowContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    aspect-ratio: 9/16;
+    height: 70vh;
+    max-height: 800px;
+  }
 `;
 
 const SlideImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 15px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  animation: ${slideIn} 0.5s ease-out;
-  background: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: ${props => (props.active ? 1 : 0)};
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  transform: scale(${props => (props.active ? 1 : 1.1)});
   padding: 0.5rem;
+  border-radius: 10px;
 `;
 
-const SlideButton = styled.button`
+const NavButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.2);
   color: white;
   border: none;
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
   transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
   z-index: 2;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.3);
     transform: translateY(-50%) scale(1.1);
+  }
+
+  ${props => props.left ? 'left: 20px;' : 'right: 20px;'}
+
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    ${props => props.left ? 'left: 10px;' : 'right: 10px;'}
   }
 `;
 
-const PrevButton = styled(SlideButton)`
-  left: 10px;
-`;
-
-const NextButton = styled(SlideButton)`
-  right: 10px;
-`;
-
 const DotContainer = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 12px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+
+  @media (max-width: 768px) {
+    bottom: 10px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
 `;
 
 const Dot = styled.button`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  border: none;
-  background: ${props => props.active ? '#4db8ff' : 'rgba(255, 255, 255, 0.3)'};
+  border: 2px solid white;
+  background: ${props => props.active ? 'white' : 'transparent'};
   cursor: pointer;
   transition: all 0.3s ease;
 
@@ -143,9 +180,10 @@ function SoundProofing() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const images = [
-    // Images will be added here
-    // Example format:
-    // { src: "/images/sound-proofing/image1.jpg", alt: "Sound Proofing Example 1" },
+    { src: "/images/SP/sp1.jpg", alt: "Sound Proofing Project - View 1" },
+    { src: "/images/SP/sp2.jpg", alt: "Sound Proofing Project - View 2" },
+    { src: "/images/SP/sp3.jpg", alt: "Sound Proofing Project - View 3" },
+    { src: "/images/SP/sp4.jpg", alt: "Sound Proofing Project - View 4" }
   ];
 
   useEffect(() => {
@@ -182,13 +220,17 @@ function SoundProofing() {
 
       {images.length > 0 && (
         <SlideshowContainer>
-          <SlideImage 
-            src={images[currentSlide].src} 
-            alt={images[currentSlide].alt} 
-            key={currentSlide}
-          />
-          <PrevButton onClick={prevSlide}>←</PrevButton>
-          <NextButton onClick={nextSlide}>→</NextButton>
+          {images.map((image, index) => (
+            <SlideImage 
+              key={image.src}
+              src={image.src} 
+              alt={image.alt} 
+              active={index === currentSlide}
+              loading="lazy"
+            />
+          ))}
+          <NavButton left onClick={prevSlide}>&lt;</NavButton>
+          <NavButton onClick={nextSlide}>&gt;</NavButton>
           <DotContainer>
             {images.map((_, index) => (
               <Dot 
