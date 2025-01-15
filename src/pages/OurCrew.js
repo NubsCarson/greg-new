@@ -13,17 +13,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const slideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(1.1);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-`;
-
 const CrewContainer = styled.div`
   width: 100%;
   min-height: 100vh;

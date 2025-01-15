@@ -13,11 +13,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const shine = keyframes`
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-`;
-
 const PageContainer = styled.div`
   width: 100%;
   min-height: 100vh;
