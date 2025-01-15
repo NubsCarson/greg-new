@@ -102,11 +102,6 @@ const Title = styled.h1`
   }
 `;
 
-const Highlight = styled.span`
-  color: #005580;
-  font-weight: bold;
-`;
-
 const Feature = styled.div`
   margin: 1.5rem 0;
   padding: 1rem;

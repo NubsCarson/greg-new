@@ -7,11 +7,6 @@ const fadeIn = keyframes`
   to { opacity: 1; }
 `;
 
-const slideIn = keyframes`
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-`;
-
 const PageContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
