@@ -273,13 +273,13 @@ const BeforeAndAfter = () => {
   const additionalImages = [
     {
       src: "images/work/aftera.jpg",
-      alt: "Project After A",
-      type: "After"
+      alt: "Project Before A",
+      type: "Before"
     },
     {
       src: "images/work/beforea.jpg",
-      alt: "Project Before A",
-      type: "Before"
+      alt: "Project After A",
+      type: "After"
     },
     {
       src: "images/work/beforeb.jpg",
