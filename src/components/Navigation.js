@@ -1,53 +1,60 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
-const pulse = keyframes`
-  0% {
-    box-shadow: 0 0 0 0 rgba(77, 184, 255, 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(77, 184, 255, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(77, 184, 255, 0);
-  }
-`;
-
-const Nav = styled.nav`
+const NavContainer = styled.nav`
   background: linear-gradient(135deg, #005580 0%, #003854 100%);
-  padding: 1rem 2rem;
+  padding: 1rem;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-`;
-
-const NavContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const Logo = styled.img`
   height: 120px;
   width: auto;
   margin-bottom: 1rem;
-  transition: transform 0.3s ease;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
   @media (max-width: 768px) {
     height: 90px;
-    margin-bottom: 0.5rem;
+  }
+`;
+
+const TopBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+`;
+
+const MenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 `;
 
@@ -59,15 +66,11 @@ const NavLinks = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     width: 100%;
-    gap: 0.8rem;
-    max-height: ${props => (props.isOpen ? '500px' : '0')};
+    max-height: ${props => (props.isOpen ? '100vh' : '0')};
     overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: ${props => (props.isOpen ? '1rem' : '0')};
-    opacity: ${props => (props.isOpen ? '1' : '0')};
-    transform: translateY(${props => (props.isOpen ? '0' : '-10px')});
+    transition: max-height 0.3s ease-in-out;
+    gap: 0.35rem;
+    padding: ${props => (props.isOpen ? '0.5rem 0' : '0')};
   }
 `;
 
@@ -75,120 +78,87 @@ const NavLink = styled(Link)`
   color: white;
   text-decoration: none;
   font-size: 1.1rem;
-  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #4db8ff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
     width: 100%;
     text-align: center;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-
+    padding: 0.4rem;
+    font-size: 0.95rem;
+    
     &:hover {
-      background: rgba(77, 184, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+      transform: none;
     }
   }
 `;
 
-const HiringButton = styled(Link)`
-  background: linear-gradient(135deg, #4db8ff 0%, #0077cc 100%);
+const HiringButton = styled(NavLink)`
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
   color: white;
-  padding: 0.8rem 1.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 25px;
-  text-decoration: none;
   font-weight: bold;
-  transition: all 0.3s ease;
-  animation: ${pulse} 2s infinite;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.3);
 
   &:hover {
+    background: linear-gradient(135deg, #ff5252 0%, #ff4242 100%);
     transform: translateY(-2px);
-    background: linear-gradient(135deg, #66c2ff 0%, #0088ee 100%);
+    box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4);
   }
 
   @media (max-width: 768px) {
-    width: 100%;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1rem;
+    width: 90%;
+    margin: 0.35rem auto;
+    padding: 0.4rem;
+    font-size: 0.95rem;
   }
-`;
-
-const MenuButton = styled.button`
-  display: none;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  transition: all 0.3s ease;
-  position: absolute;
-  top: 1.5rem;
-  right: 1rem;
-  z-index: 1001;
-  -webkit-tap-highlight-color: transparent;
-
-  &:hover {
-    color: #4db8ff;
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
-
-const TopBar = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
 `;
 
 function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   const scrollToHiring = () => {
     const hiringSection = document.getElementById('hiring-section');
     if (hiringSection) {
       hiringSection.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
     }
+    setIsOpen(false);
   };
 
   return (
-    <Nav>
-      <NavContainer>
-        <TopBar>
-          <Logo src="/images/Logo.png" alt="Affordable Drywall LLC Logo" />
-          <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? '✕' : '☰'}
-          </MenuButton>
-        </TopBar>
-        <NavLinks isOpen={isMenuOpen}>
-          <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
-          <NavLink to="/services" onClick={() => setIsMenuOpen(false)}>Services</NavLink>
-          <NavLink to="/our-work" onClick={() => setIsMenuOpen(false)}>Our Work</NavLink>
-          <NavLink to="/our-crew" onClick={() => setIsMenuOpen(false)}>Our Crew</NavLink>
-          <NavLink to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</NavLink>
-          <HiringButton to="/#hiring-section" onClick={scrollToHiring}>
-            🔨 We're Hiring!
-          </HiringButton>
-        </NavLinks>
-      </NavContainer>
-    </Nav>
+    <NavContainer>
+      <TopBar>
+        <Logo src="/images/Logo.png" alt="Affordable Drywall LLC Logo" />
+        <MenuButton onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? '✕' : '☰'}
+        </MenuButton>
+      </TopBar>
+      <NavLinks isOpen={isOpen}>
+        <NavLink to="/" onClick={handleLinkClick}>Home</NavLink>
+        <NavLink to="/services" onClick={handleLinkClick}>Services</NavLink>
+        <NavLink to="/before-and-after" onClick={handleLinkClick}>Before and After</NavLink>
+        <NavLink to="/our-crew" onClick={handleLinkClick}>Our Crew</NavLink>
+        <NavLink to="/contact" onClick={handleLinkClick}>Contact</NavLink>
+        <NavLink to="/hand-texturing" onClick={handleLinkClick}>Hand Texturing</NavLink>
+        <NavLink to="/fast-service" onClick={handleLinkClick}>Fast and Friendly Service</NavLink>
+        <NavLink to="/texture-matching" onClick={handleLinkClick}>Texture Matching</NavLink>
+        <NavLink to="/exterior-painting" onClick={handleLinkClick}>Exterior Painting</NavLink>
+        <NavLink to="/sound-proofing" onClick={handleLinkClick}>Sound Proofing</NavLink>
+        <HiringButton to="/#hiring-section" onClick={scrollToHiring}>🔨 We're Hiring!</HiringButton>
+      </NavLinks>
+    </NavContainer>
   );
 }
 
